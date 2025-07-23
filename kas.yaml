@@ -21,3 +21,7 @@ repos:
     layers:
       meta:
       meta-isar:
+
+local_conf_header:
+  image-format: |
+    IMAGE_FSTYPES = "wic wic.xz"
