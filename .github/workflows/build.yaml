@@ -1,0 +1,31 @@
+# This software is a part of isar demo.
+# Copyright (c) Siemens AG, 2025
+#
+# SPDX-License-Identifier: MIT
+
+name: build
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  demo-image:
+    name: demo-image
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Build image
+        run: ./kas-container build kas.yaml
+      - name: Upload image
+        uses: actions/upload-artifact@v4
+        with:
+          name: demo-image
+          path: |
+            build/tmp/deploy/images/*/*.wic.xz
+            build/tmp/deploy/images/*/*.wic.bmap
+            build/tmp/deploy/images/*/*.manifest
