@@ -12,8 +12,10 @@ The project is intended solely as a demo and should not be used as a basis for p
 
 The build can be done using [kas-container](https://github.com/siemens/kas/blob/master/kas-container).
 
+### For the Raspberry Pi 4B
+
 ```
-./kas-container build kas.yaml
+./kas-container build kas.yaml:kas/machine/rpi-arm64-v8-efi.yaml
 ```
 
 The resulting raw disk image can be flashed onto an SD card.

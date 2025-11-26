@@ -13,14 +13,14 @@ on:
   workflow_dispatch:
 
 jobs:
-  demo-image:
-    name: demo-image
+  demo-image-rpi:
+    name: demo-image-rpi
     runs-on: ubuntu-24.04
     steps:
       - name: Checkout
         uses: actions/checkout@v4
       - name: Build image
-        run: ./kas-container build kas.yaml
+        run: ./kas-container build kas.yaml:kas/machine/rpi-arm64-v8-efi.yaml
       - name: Upload image
         uses: actions/upload-artifact@v4
         with:
