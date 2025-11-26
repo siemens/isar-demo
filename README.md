@@ -26,6 +26,12 @@ The resulting raw disk image can be flashed onto an SD card.
 ./kas-container build kas.yaml:kas/machine/qemuamd64.yaml
 ```
 
+The image can be booted via (user: root, password: root):
+
+```
+./start-qemu.sh amd64
+```
+
 ## License
 
 This project is licensed according to the terms of the MIT License.
