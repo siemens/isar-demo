@@ -12,7 +12,9 @@ distro: debian-trixie
 target: demo-image
 
 repos:
-  meta-demo:
+  isar-demo:
+    layers:
+      meta-demo:
 
   isar:
     url: https://github.com/ilbers/isar.git
