@@ -9,7 +9,7 @@ header:
 build_system: isar
 
 machine: rpi-arm64-v8-efi
-distro: debian-bookworm
+distro: debian-trixie
 target: demo-image
 
 repos:
