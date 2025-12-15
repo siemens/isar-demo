@@ -13,9 +13,45 @@ on:
   workflow_dispatch:
 
 jobs:
+  commit-lint:
+    name: check conventional commits
+    runs-on: ubuntu-24.04
+    steps:
+      - name: checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: install dependencies
+        run: |
+          sudo apt update && sudo apt install -y python3-venv python3-pip
+          python3 -m venv .venv
+          source .venv/bin/activate
+          pip install commitizen
+
+      - name: check conventional commits
+        run: |
+          source .venv/bin/activate
+          if [[ "${{ github.event_name }}" == "pull_request" ]]; then
+            # For PRs, check commits from the common ancestor (base) to the latest commit
+            # on the PR branch.
+            COMMIT_RANGE="${{ github.event.pull_request.base.sha }}..${{ github.event.pull_request.head.sha }}"
+            echo "Checking PR commits in range: $COMMIT_RANGE"
+          elif [[ "${{ github.event_name }}" == "push" ]]; then
+            # For pushes, check commits from the "before" SHA to the "after" SHA.
+            COMMIT_RANGE="${{ github.event.before }}..${{ github.sha }}"
+            echo "Checking push commits in range: $COMMIT_RANGE"
+          else
+            echo "No specific commit range for ${{ github.event_name }}."
+            COMMIT_RANGE="HEAD~1..HEAD"
+          fi
+          echo "Running commitizen check for range: $COMMIT_RANGE"
+          cz check --rev-range "$COMMIT_RANGE"
+
   build-demo-images:
     name: Build demo image for (${{ matrix.machine_name }})
     runs-on: ubuntu-24.04
+    needs: commit-lint
     strategy:
       fail-fast: false
       matrix:
