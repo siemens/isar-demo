@@ -12,6 +12,7 @@ steps.
 ## Contribution Checklist
 
 - use git to manage your changes [*recommended*]
+- structure your commits following the [Conventional Commits](https://www.conventionalcommits.org) specification [**required**]
 - follow Python coding style outlined in pep8 [**required**]
 - add signed-off to all patches [**required**]
     - to certify the "Developer's Certificate of Origin", see below
