@@ -1,3 +1,8 @@
+<!--
+SPDX-FileCopyrightText: Copyright 2025 Siemens AG
+SPDX-License-Identifier: MIT
+-->
+
 # Isar Demo
 
 This demo project is designed to show some features of the build system [isar](https://github.com/ilbers/isar/):
