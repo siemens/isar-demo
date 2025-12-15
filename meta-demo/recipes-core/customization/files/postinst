@@ -1,4 +1,9 @@
 #!/bin/sh
+#
+# This software is a part of isar demo.
+# Copyright (c) Siemens AG, 2025
+#
+# SPDX-License-Identifier: MIT
 
 set -e
 
