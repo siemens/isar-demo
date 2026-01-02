@@ -23,6 +23,10 @@ repos:
       meta:
       meta-isar:
 
+  isar-cip-core:
+    url: https://gitlab.com/cip-project/cip-core/isar-cip-core.git
+    branch: master
+
 local_conf_header:
   image-format: |
     IMAGE_FSTYPES = "wic wic.xz"

@@ -4,3 +4,5 @@ overrides:
     repos:
         isar:
             commit: d364cfa643d1d61d768b5235b9783ca083a564ab
+        isar-cip-core:
+            commit: c75b584f32411a03c3ca9a9b023cd4e74d79d32f
