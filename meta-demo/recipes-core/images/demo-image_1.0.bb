@@ -3,14 +3,10 @@
 #
 # SPDX-License-Identifier: MIT
 
-require recipes-core/images/isar-image-base.bb
+## Basic demo image
 
-ISAR_RELEASE_CMD = "git -C ${LAYERDIR_meta-demo} describe --tags --dirty --always --match 'v[0-9].[0-9]*'"
+# base config on meta-demo/recipes-core/images/base.inc
+require recipes-core/images/base.inc
 
+# meta-demo/recipes-app/custom-app
 IMAGE_INSTALL += "custom-app"
-IMAGE_INSTALL += "customization"
-IMAGE_PREINSTALL += "vim"
-
-USERS += "root"
-USER_root[flags] = "clear-text-password"
-USER_root[password] = "root"
