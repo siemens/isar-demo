@@ -57,14 +57,14 @@ jobs:
       matrix:
         include:
           - machine_name: Raspberry Pi 4B
-            kas_config: kas/machine/rpi-arm64-v8-efi.yaml
+            kas_config: kas.yaml:kas/machine/rpi-arm64-v8-efi.yaml
           - machine_name: QEMU AMD64
-            kas_config: kas/machine/qemuamd64.yaml
+            kas_config: kas.yaml:kas/machine/qemuamd64.yaml
     steps:
       - name: Checkout
         uses: actions/checkout@v4
       - name: Build image for ${{ matrix.machine_name }}
-        run: ./kas-container build kas.yaml:${{ matrix.kas_config }}
+        run: ./kas-container build ${{ matrix.kas_config }}
       - name: Upload image for ${{ matrix.machine_name }}
         uses: actions/upload-artifact@v4
         with:
