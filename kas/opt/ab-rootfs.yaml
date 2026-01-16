@@ -1,0 +1,13 @@
+# This software is a part of isar demo.
+# Copyright (c) Siemens AG, 2025
+#
+# SPDX-License-Identifier: MIT
+
+header:
+  version: 17
+ 
+local_conf_header:
+  partition-uuids: |
+    # define UUIDs for the A/B rootfs partitions
+    ABROOTFS_PART_UUID_A = "fedcba98-7654-3210-cafe-5e0710000001"
+    ABROOTFS_PART_UUID_B = "fedcba98-7654-3210-cafe-5e0710000002"
