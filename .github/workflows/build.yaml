@@ -70,6 +70,6 @@ jobs:
         with:
           name: demo-image-${{ matrix.machine_name }}
           path: |
-            build/tmp/deploy/images/*/*.wic.xz
+            build/tmp/deploy/images/*/*.wic.zst
             build/tmp/deploy/images/*/*.wic.bmap
             build/tmp/deploy/images/*/*.manifest
