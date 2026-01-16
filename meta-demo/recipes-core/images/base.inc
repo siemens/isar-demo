@@ -15,7 +15,11 @@ USER_root[password] = "root"
 
 # packages from upstream Debian
 IMAGE_PREINSTALL += "\
-  vim
+  vim-tiny \
+  iproute2 \
+  inetutils-ping \
+  less \
+  curl \
   "
 
 # Isar-built packages
