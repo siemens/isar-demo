@@ -6,4 +6,5 @@
 header:
   version: 17
 
+# using isar/meta-isar/conf/machine/rpi-arm64-v8-efi.conf
 machine: rpi-arm64-v8-efi
