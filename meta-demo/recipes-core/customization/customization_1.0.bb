@@ -13,9 +13,10 @@ SRC_URI = "file://postinst \
           "
 
 # isar/meta/recipes-support/sshd-regen-keys
-RDEPENDS += "sshd-regen-keys"
+# isar-cip-core/recipes-core/change-root-homedir
+RDEPENDS += "sshd-regen-keys change-root-homedir"
 
-DEBIAN_DEPENDS = "systemd-resolved, ssh, sshd-regen-keys"
+DEBIAN_DEPENDS = "systemd-resolved, ssh, sshd-regen-keys, change-root-homedir"
 
 do_install[cleandirs] += "${D}/etc/systemd/network \
                           ${D}/etc/ssh/sshd_config.d \
