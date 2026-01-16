@@ -6,4 +6,5 @@
 header:
   version: 17
 
+# using isar/meta-isar/conf/machine/qemuamd64.conf
 machine: qemuamd64
