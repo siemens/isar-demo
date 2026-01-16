@@ -60,6 +60,8 @@ jobs:
             kas_config: kas.yaml:kas/machine/rpi-arm64-v8-efi.yaml
           - machine_name: QEMU AMD64
             kas_config: kas.yaml:kas/machine/qemuamd64.yaml
+          - machine_name: QEMU AMD64 with SWUpdate
+            kas_config: kas-swupdate.yaml:kas/opt/ab-rootfs.yaml:kas/machine/qemuamd64-swupdate.yaml
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -73,3 +75,4 @@ jobs:
             build/tmp/deploy/images/*/*.wic.zst
             build/tmp/deploy/images/*/*.wic.bmap
             build/tmp/deploy/images/*/*.manifest
+            build/tmp/deploy/images/*/*.swu
