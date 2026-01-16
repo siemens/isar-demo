@@ -11,3 +11,6 @@ HOSTNAME="isar-demo"
 
 echo "${HOSTNAME}" > /etc/hostname
 echo "127.0.1.1	${HOSTNAME}" >> /etc/hosts
+
+deb-systemd-helper enable systemd-resolved.service
+#DEBHELPER
