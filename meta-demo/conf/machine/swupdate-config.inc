@@ -3,9 +3,6 @@
 #
 # SPDX-License-Identifier: MIT
 
-# the swu file is based on a read-only root filesystem in squashfs format
-RO_ROOTFS_TYPE = "squashfs"
-
 # specify preferred providers for SWUpdate
 PREFERRED_PROVIDER_swupdate-certificates = "swupdate-certificates-snakeoil"
 PREFERRED_PROVIDER_swupdate-certificates-key = "swupdate-certificates-key-snakeoil"
