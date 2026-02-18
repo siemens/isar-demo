@@ -1,8 +1,8 @@
 header:
-    version: 14
+  version: 14
 overrides:
-    repos:
-        isar:
-            commit: d364cfa643d1d61d768b5235b9783ca083a564ab
-        isar-cip-core:
-            commit: c75b584f32411a03c3ca9a9b023cd4e74d79d32f
+  repos:
+    isar:
+      commit: 481db3b2e8949336576e50a78aaf5d101f52c8d2
+    isar-cip-core:
+      commit: 0b6003abce37a084c4114ab3560bcc03d58898df
