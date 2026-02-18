@@ -7,8 +7,6 @@
 
 # base config on meta-demo/recipes-core/images/base.inc
 require recipes-core/images/base.inc
-# base config on isar-cip-core/recipes-core/images/efibootguard.inc
-require recipes-core/images/efibootguard.inc
 # base config on isar-cip-core/recipes-core/images/swupdate.inc
 require recipes-core/images/swupdate.inc
 
