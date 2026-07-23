@@ -152,7 +152,7 @@ In contrast to Isar-cip-core, where SWUpdate configurations are made via kas sni
 *   Update [`kas.lock.yaml`](kas.lock.yaml): The `kas` lock file ensures that the build is reproducible by locking the commit hash of each repository.
 
     ```
-    ./kas-container lock kas.yaml
+    ./kas-container lock --update kas.yaml
     ```
 
 ### 2. Set SWUpdate options
