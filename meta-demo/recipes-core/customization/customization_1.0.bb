@@ -4,6 +4,7 @@
 # SPDX-License-Identifier: MIT
 
 DESCRIPTION = "Image customization"
+MAINTAINER = "Clara Kowalsky <clara.kowalsky@siemens.com>"
 
 inherit dpkg-raw
 
