@@ -6,7 +6,7 @@
 header:
   version: 17
 
-build_system: isar
+build_system: isar-privileged
 
 distro: debian-trixie
 machine: qemuamd64
