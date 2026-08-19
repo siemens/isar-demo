@@ -1,0 +1,4 @@
+client-host: 0.0.0.0
+mgmt-host: 0.0.0.0
+log-level: debug
+simple-fileserver: /var/lib/wfx/files
