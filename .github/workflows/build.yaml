@@ -63,8 +63,11 @@ jobs:
             machine_name: Raspberry Pi 4B
             kas_config: kas/control-plane.yaml
           - image_name: SWUpdate client image
-            machine_name: x86 IPC
+            machine_name: x86 IPC (baseline)
             kas_config: kas/client.yaml
+          - image_name: SWUpdate client image
+            machine_name: x86 IPC (update)
+            kas_config: kas/client-update.yaml
     steps:
       - name: Checkout
         uses: actions/checkout@v4

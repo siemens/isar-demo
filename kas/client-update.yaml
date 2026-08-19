@@ -1,0 +1,20 @@
+# This software is a part of isar demo.
+# Copyright (c) Siemens AG, 2026
+#
+# SPDX-License-Identifier: MIT
+
+header:
+  version: 17
+  includes:
+    - kas.yaml
+
+build_system: isar-privileged
+
+# using meta-demo/conf/machine/amd64-swupdate.conf
+machine: amd64-swupdate
+# using meta-demo/recipes-core/images/demo-image-client-update_1.0.bb
+target: demo-image-client-update
+
+local_conf_header:
+  overrides: |
+    OVERRIDES .= ":client"
