@@ -1,0 +1,16 @@
+# This software is a part of isar demo.
+# Copyright (c) Siemens AG, 2026
+#
+# SPDX-License-Identifier: MIT
+
+header:
+  version: 17
+  includes:
+    - kas.yaml
+
+build_system: isar-privileged
+
+# using isar/meta-isar/conf/machine/rpi-arm64-v8-efi.conf
+machine: rpi-arm64-v8-efi
+# using meta-demo/recipes-core/images/control-plane-image_1.0.bb
+target: control-plane-image

@@ -59,9 +59,9 @@ jobs:
           - image_name: Simple demo image
             machine_name: QEMU AMD64
             kas_config: kas.yaml
-          - image_name: Simple demo image
+          - image_name: Control-plane image
             machine_name: Raspberry Pi 4B
-            kas_config: kas.yaml:kas/machine/rpi-arm64-v8-efi.yaml
+            kas_config: kas/control-plane.yaml
           - image_name: SWUpdate client image
             machine_name: x86 IPC
             kas_config: kas/client.yaml
