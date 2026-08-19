@@ -17,3 +17,6 @@ IMAGE_INSTALL += "swupdate-confirm"
 # meta-demo/recipes-core/customization
 IMAGE_INSTALL:remove = "customization"
 IMAGE_INSTALL += "customization-client"
+
+DELTA_UPDATE_TYPE = "zchunk"
+DELTA_ZCK_URL = "http://10.0.5.1:8080/download/client-baseline.zck"
