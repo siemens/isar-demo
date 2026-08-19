@@ -1,0 +1,11 @@
+[Unit]
+Description=swupdate-confirm
+Before=swupdate.service
+
+[Service]
+Type=oneshot
+ExecStart=/usr/sbin/swupdate-confirm.sh
+RemainAfterExit=yes
+
+[Install]
+WantedBy=multi-user.target

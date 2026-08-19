@@ -10,3 +10,6 @@ require recipes-core/images/demo-image-swupdate.inc
 
 # meta-demo/recipes-support/swupdate-config-wfx
 IMAGE_INSTALL += "swupdate-config-wfx"
+
+# meta-demo/recipes-support/swupdate-confirm
+IMAGE_INSTALL += "swupdate-confirm"
