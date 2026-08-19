@@ -49,30 +49,34 @@ jobs:
           cz check --rev-range "$COMMIT_RANGE"
 
   build-demo-images:
-    name: Build demo image for (${{ matrix.machine_name }})
+    name: ${{ matrix.image_name }} for ${{ matrix.machine_name }}
     runs-on: ubuntu-24.04
     needs: commit-lint
     strategy:
       fail-fast: false
       matrix:
         include:
-          - machine_name: Raspberry Pi 4B
-            kas_config: kas.yaml:kas/machine/rpi-arm64-v8-efi.yaml
-          - machine_name: QEMU AMD64
+          - image_name: Simple demo image
+            machine_name: QEMU AMD64
             kas_config: kas.yaml
-          - machine_name: QEMU AMD64 with SWUpdate
-            kas_config: kas/qemu-swupdate.yaml
+          - image_name: Simple demo image
+            machine_name: Raspberry Pi 4B
+            kas_config: kas.yaml:kas/machine/rpi-arm64-v8-efi.yaml
+          - image_name: SWUpdate client image
+            machine_name: x86 IPC
+            kas_config: kas/client.yaml
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Build image for ${{ matrix.machine_name }}
+      - name: Build - ${{ matrix.image_name }} for ${{ matrix.machine_name }}
         run: ./kas-container build ${{ matrix.kas_config }}
-      - name: Upload image for ${{ matrix.machine_name }}
+      - name: Upload - ${{ matrix.image_name }} for ${{ matrix.machine_name }}
         uses: actions/upload-artifact@v4
         with:
-          name: demo-image-${{ matrix.machine_name }}
+          name: ${{ matrix.image_name }} for ${{ matrix.machine_name }}
           path: |
             build/tmp/deploy/images/*/*.wic.zst
             build/tmp/deploy/images/*/*.wic.bmap
             build/tmp/deploy/images/*/*.manifest
             build/tmp/deploy/images/*/*.swu
+            build/tmp/deploy/images/*/*.zck
