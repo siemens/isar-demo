@@ -32,7 +32,7 @@ TEMPLATE_VARS += " \
 # isar-cip-core/recipes-core/change-root-homedir
 RDEPENDS += "sshd-regen-keys change-root-homedir"
 
-DEBIAN_DEPENDS = "systemd-resolved, ssh, sshd-regen-keys, change-root-homedir"
+DEBIAN_DEPENDS = "systemd-resolved, systemd-timesyncd, ssh, sshd-regen-keys, change-root-homedir"
 
 do_install[cleandirs] += " \
     ${D}/etc/systemd/network \
