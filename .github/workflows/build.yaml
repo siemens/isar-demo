@@ -59,7 +59,7 @@ jobs:
           - machine_name: Raspberry Pi 4B
             kas_config: kas.yaml:kas/machine/rpi-arm64-v8-efi.yaml
           - machine_name: QEMU AMD64
-            kas_config: kas.yaml:kas/machine/qemuamd64.yaml
+            kas_config: kas.yaml
           - machine_name: QEMU AMD64 with SWUpdate
             kas_config: kas-swupdate.yaml:kas/opt/ab-rootfs.yaml:kas/machine/qemuamd64-swupdate.yaml
     steps:

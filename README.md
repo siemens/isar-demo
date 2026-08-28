@@ -85,7 +85,7 @@ Build an image variant for QEMU AMD64:
 - The [`demo-image`](meta-demo/recipes-core/images/demo-image_1.0.bb):
 
     ```
-    ./kas-container build kas.yaml:kas/machine/qemuamd64.yaml
+    ./kas-container build kas.yaml
     ```
 
 - Or the [`demo-image-swupdate`](meta-demo/recipes-core/images/demo-image-swupdate_1.0.bb):
