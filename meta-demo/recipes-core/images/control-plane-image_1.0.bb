@@ -8,6 +8,10 @@
 # base config on meta-demo/recipes-core/images/base.inc
 require recipes-core/images/base.inc
 
+# meta-demo/recipes-core/customization
+IMAGE_INSTALL:remove = "customization"
+IMAGE_INSTALL += "customization-server"
+
 # packages from upstream Debian
 IMAGE_PREINSTALL += " \
   jq \

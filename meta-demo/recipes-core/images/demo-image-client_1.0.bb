@@ -13,3 +13,7 @@ IMAGE_INSTALL += "swupdate-config-wfx"
 
 # meta-demo/recipes-support/swupdate-confirm
 IMAGE_INSTALL += "swupdate-confirm"
+
+# meta-demo/recipes-core/customization
+IMAGE_INSTALL:remove = "customization"
+IMAGE_INSTALL += "customization-client"

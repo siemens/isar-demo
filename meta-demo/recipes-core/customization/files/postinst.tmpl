@@ -7,7 +7,7 @@
 
 set -e
 
-HOSTNAME="isar-demo"
+HOSTNAME="${ISAR_DEMO_HOSTNAME}"
 
 echo "${HOSTNAME}" > /etc/hostname
 echo "127.0.1.1	${HOSTNAME}" >> /etc/hosts
