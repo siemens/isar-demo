@@ -44,7 +44,7 @@ Build an image variant for the Raspberry Pi:
 - Or the [`demo-image-swupdate`](meta-demo/recipes-core/images/demo-image-swupdate_1.0.bb):
 
     ```
-    ./kas-container build kas-swupdate.yaml:kas/opt/ab-rootfs.yaml:kas/machine/rpi-arm64-v8-swupdate.yaml
+    ./kas-container build kas-swupdate.yaml:kas/machine/rpi-arm64-v8-swupdate.yaml
     ```
 
 Unpack the image:
@@ -91,7 +91,7 @@ Build an image variant for QEMU AMD64:
 - Or the [`demo-image-swupdate`](meta-demo/recipes-core/images/demo-image-swupdate_1.0.bb):
 
     ```
-    ./kas-container build kas-swupdate.yaml:kas/opt/ab-rootfs.yaml:kas/machine/qemuamd64-swupdate.yaml
+    ./kas-container build kas-swupdate.yaml:kas/machine/qemuamd64-swupdate.yaml
     ```
 
 Unpack the image:
