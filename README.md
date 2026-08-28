@@ -7,118 +7,62 @@ SPDX-License-Identifier: MIT
 
 This is a demo project showcasing the use of [Isar](https://github.com/ilbers/isar) and [Isar-cip-core](https://gitlab.com/cip-project/cip-core/isar-cip-core) for building Debian-based images.
 
-Targets:
-- Raspberry Pi 4B (ARM64)
-- QEMU AMD64
+**Important Note:** This project is intended solely as a demo and should not be used as a basis for product development.
+
+## Contents
+
+- [Overview](#overview)
+- [Base demo with QEMU AMD64](#base-demo-with-qemu-amd64)
+- [Integrate a new feature: SWUpdate](#integrate-a-new-feature-swupdate)
+- [License](#license)
+
+## Overview
 
 Image variants:
 - `demo-image`: Basic demo image with custom C application installed. A description of this image variant can be found [in this recording](https://youtu.be/j5OqhlvZGTE?si=nXsdTbEu_HAthn8G).
-- `demo-image-swupdate`: Demo image with SWUpdate in place. This illustrates:
+- `demo-image-swupdate`: Demo image with [SWUpdate]((https://github.com/sbabic/swupdate)) in place. This illustrates:
     - Read-only root filesystem with mutable data partition
     - A/B partitioning
-    - Robust firmware updates via [SWUpdate](https://github.com/sbabic/swupdate)
+    - Robust firmware updates via SWUpdate
     - SBOM reports via [debsbom](https://github.com/siemens/debsbom)
 
-**Important Note:** This project is intended solely as a demo and should not be used as a basis for product development.
+Targets:
+- QEMU AMD64: Used for the base demo and feature integration
+- Raspberry Pi 4B (ARM64)
 
-## Build and run
+## Base demo with QEMU AMD64
 
 The build can be done using [`kas-container`](https://github.com/siemens/kas/blob/master/kas-container).
 Please refer to the [kas user guide](https://kas.readthedocs.io/).
 As `kas-container` performs builds in a containerized environment, install [Docker](https://docs.docker.com/engine/install/) or [Podman](https://podman.io/docs/installation).
 
-The resulting images are located in the `build/tmp/deploy/images` directory.
+### 1. Build the basic demo image
 
-### For the Raspberry Pi
+Build the [`demo-image`](meta-demo/recipes-core/images/demo-image_1.0.bb) for QEMU AMD64:
 
-#### Build the Raspberry Pi image
-
-Build an image variant for the Raspberry Pi:
-
-- The [`demo-image`](meta-demo/recipes-core/images/demo-image_1.0.bb):
-
-    ```
-    ./kas-container build kas.yaml:kas/machine/rpi-arm64-v8-efi.yaml
-    ```
-
-- Or the [`demo-image-swupdate`](meta-demo/recipes-core/images/demo-image-swupdate_1.0.bb):
-
-    ```
-    ./kas-container build kas/qemu-swupdate.yaml:kas/machine/rpi-arm64-v8-swupdate.yaml
-    ```
+```
+./kas-container build kas.yaml
+```
 
 Unpack the image:
 
 ```
-unzstd build/tmp/deploy/images/rpi*/*.wic.zst
+unzstd build/tmp/deploy/images/qemuamd64/*.wic.zst
 ```
 
-#### Boot the Raspberry Pi image
-
-Flash the image onto an SD card using `dd`or [Balena Etcher](https://etcher.balena.io/).
-Boot the Raspberry Pi with the SD card inserted.
-If you have a USB connection to the Raspberry Pi, you can connect via:
-
-```
-screen /dev/ttyUSB0 115200
-```
-
-Connect an Ethernet cable from the Raspberry Pi to your router.
-After logging in via the USB connection, check the IP address of the en* interface:
-
-```
-ip a
-```
-
-From another shell, you can connect to the Raspberry Pi via SSH:
-
-```
-ssh root@<ip_address>
-```
-
-### For QEMU AMD64
-
-#### Build the QEMU AMD64 image
-
-Build an image variant for QEMU AMD64:
-
-- The [`demo-image`](meta-demo/recipes-core/images/demo-image_1.0.bb):
-
-    ```
-    ./kas-container build kas.yaml
-    ```
-
-- Or the [`demo-image-swupdate`](meta-demo/recipes-core/images/demo-image-swupdate_1.0.bb):
-
-    ```
-    ./kas-container build kas/qemu-swupdate.yaml
-    ```
-
-Unpack the image:
-
-```
-unzstd build/tmp/deploy/images/qemuamd64*/*.wic.zst
-```
+### 2. Boot the image in QEMU
 
 Make sure that you have these packages installed on your Debian system:
 - `qemu-system-x86`: For emulating Intel/AMD CPUs.
 - `ovmf`: UEFI firmware for QEMU virtual machines.
 
-#### Boot the QEMU AMD64 image
+Boot the image:
 
-Boot the image (user: root, password: root):
+```
+./start-qemu.sh amd64
+```
 
-- The `demo-image`:
-
-    ```
-    ./start-qemu.sh amd64
-    ```
-
-- Or the `demo-image-swupdate`:
-
-    ```
-    TARGET=demo-image-swupdate MACHINE=qemuamd64-swupdate ./start-qemu.sh amd64
-    ```
+Log in with user `root` (password: `root`).
 
 From another shell, connect to the QEMU image via SSH:
 
@@ -126,7 +70,7 @@ From another shell, connect to the QEMU image via SSH:
 ssh root@localhost -p 22222
 ```
 
-## Integrate a new feature into the demo - Example SWUpdate
+## Integrate a new feature: SWUpdate
 
 This section shows what needs to be considered when adding a new feature to the demo.
 For this, we use the example of adding the image variant with SWUpdate (`demo-image-swupdate`).
@@ -157,41 +101,67 @@ In contrast to Isar-cip-core, where SWUpdate configurations are made via kas sni
 
 ### 2. Set SWUpdate options
 
-Machine-specific configurations should be placed in dedicated `.conf` files: [`rpi-arm64-v8-swupdate.conf`](meta-demo/conf/machine/rpi-arm64-v8-swupdate.conf) and [`qemuamd64-swupdate.conf`](meta-demo/conf/machine/qemuamd64-swupdate.conf).
-Image-specific configurations should be done in a dedicated image recipe for SWUpdate: [`demo-image-swupdate_1.0.bb`](meta-demo/recipes-core/images/demo-image-swupdate_1.0.bb).
+- Machine-specific configurations should be placed in a dedicated `.conf` file: [`qemuamd64-swupdate.conf`](meta-demo/conf/machine/qemuamd64-swupdate.conf)
 
-*   Build the `demo-image-swupdate` variant where SWUpdate is configured, for the [Raspberry Pi](#Build-the-Raspberry-Pi-image) or [QEMU](#Build-the-QEMU-AMD64-image).
+- Image-specific configurations should be done in a dedicated image recipe for SWUpdate: [`demo-image-swupdate_1.0.bb`](meta-demo/recipes-core/images/demo-image-swupdate_1.0.bb)
 
-*   Boot the `demo-image-swupdate` variant, for the [Raspberry Pi](#Boot-the-Raspberry-Pi-image) or [QEMU](#Boot-the-QEMU-AMD64-image).
+- kas target file: [`kas/qemu-swupdate.yaml`](kas/qemu-swupdate.yaml)
 
-### 3. Prepare the image for SWUpdate
+Build the image:
 
-To test the update process, we need to produce an image that is different to the booted version.
+```
+./kas-container build kas/qemu-swupdate.yaml
+```
 
-*   Make a small change in the image recipe:
+Unpack the image:
 
-    Let's add the package `cowsay` in [`demo-image-swupdate_1.0.bb`](meta-demo/recipes-core/images/demo-image-swupdate_1.0.bb): `IMAGE_PREINSTALL += "cowsay"`
+```
+unzstd build/tmp/deploy/images/qemuamd64-swupdate/*.wic.zst
+```
 
-*   Rebuild the `demo-image-swupdate` variant. This creates an updated `.swu` file in `build/tmp/deploy/images/*-swupdate/`.
+### 2. Boot the SWUpdate image
 
-*   Copy the `.swu` file into your booted image with SSH:
+Boot the QEMU image with the swupdate machine configuration:
 
+```
+TARGET=demo-image-swupdate MACHINE=qemuamd64-swupdate ./start-qemu.sh amd64
+```
 
-    For the Raspberry Pi: `scp build/tmp/deploy/images/rpi*-swupdate/demo-image-swupdate-debian-trixie-*-swupdate.swu root@<ip_address>:`
+### 3. Prepare an update artifact
 
-    For QEMU AMD64: `scp -P 22222 build/tmp/deploy/images/qemuamd64-swupdate/demo-image-swupdate-debian-trixie-*-swupdate.swu root@localhost:`
+To test the update process, produce an update image with a visible change.
+
+*   Add a new package (e.g. `cowsay`) in [`demo-image-swupdate_1.0.bb`](meta-demo/recipes-core/images/demo-image-swupdate_1.0.bb):
+
+    ```bitbake
+    IMAGE_PREINSTALL += "cowsay"
+    ```
+
+*   Rebuild the image:
+
+    ```
+    ./kas-container build kas/qemu-swupdate.yaml
+    ```
+
+    This creates an updated `.swu` file in `build/tmp/deploy/images/qemuamd64-swupdate/`.
+
+*   Copy the `.swu` file into the running QEMU machine via SSH:
+
+    ```
+    scp -P 22222 build/tmp/deploy/images/qemuamd64-swupdate/demo-image-swupdate-debian-trixie-qemuamd64-swupdate.swu root@localhost:
+    ```
 
 ### 4. Run SWUpdate in the image
 
 Follow the steps described in the [Isar-cip-core SWUpdate README](https://gitlab.com/cip-project/cip-core/isar-cip-core/-/blob/master/doc/README.swupdate.md#swupdate-verification).
 
-*   The SWUpdate command would be:
+*   Install the update artifact:
 
     ```
-    swupdate -i demo-image-swupdate-debian-trixie-*-swupdate.swu
+    swupdate -i demo-image-swupdate-debian-trixie-qemuamd64-swupdate.swu
     ```
 
-*   After reboot, the image contains `cowsay`:
+*   After reboot, the system switches to the other rootfs partition and contains `cowsay`:
 
     ```
     root@isar-demo:~# /usr/games/cowsay Hello Isar
@@ -205,7 +175,7 @@ Follow the steps described in the [Isar-cip-core SWUpdate README](https://gitlab
                     ||     ||
     ```
 
-*   Make sure to confirm the update in the end:
+*   Confirm the successful update:
 
     ```
     bg_setenv -c
