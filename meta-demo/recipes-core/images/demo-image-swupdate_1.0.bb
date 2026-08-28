@@ -12,3 +12,6 @@ require recipes-core/images/swupdate.inc
 
 # isar-cip-core/recipes-core/swupdate-config
 IMAGE_INSTALL += "swupdate-config-${MACHINE}"
+
+# isar/meta/recipes-support/expand-on-first-boot
+IMAGE_INSTALL += "expand-on-first-boot"
