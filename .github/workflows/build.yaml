@@ -61,7 +61,7 @@ jobs:
           - machine_name: QEMU AMD64
             kas_config: kas.yaml
           - machine_name: QEMU AMD64 with SWUpdate
-            kas_config: kas-swupdate.yaml:kas/machine/qemuamd64-swupdate.yaml
+            kas_config: kas/qemu-swupdate.yaml
     steps:
       - name: Checkout
         uses: actions/checkout@v4
