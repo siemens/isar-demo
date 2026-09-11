@@ -320,14 +320,14 @@ sequenceDiagram
     participant Lamp as Optional lamp
 
     Operator->>wfx: Create update job
-    wfx-->>Client: Advertise job via southbound API
-    Client->>wfx: Fetch job details
-    Client->>wfx: Download .swu from /download/
+    Client-->>wfx: Poll for jobs
+    wfx->>Client: Fetch job details
+    wfx->>Client: Download .swu from /download/
     Client-->>Lamp: Show update progress
     Client->>Client: Install update and reboot
-    Client->>wfx: Report activation success
+    Client->>wfx: Report new job status
     Client->>Client: Auto-confirm booted update
-    wfx-->>Operator: UI shows ACTIVATED
+    wfx-->>Operator: UI shows job status
 ```
 
 The helper script submits a job for client id `isar-demo-client` and uses:
