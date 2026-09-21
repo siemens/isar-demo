@@ -3,6 +3,6 @@ header:
 overrides:
   repos:
     isar:
-      commit: 481db3b2e8949336576e50a78aaf5d101f52c8d2
+      commit: 2bac0a0c07d0d1335900367257d8c0cd5c2ee107
     isar-cip-core:
       commit: 0b6003abce37a084c4114ab3560bcc03d58898df
