@@ -8,7 +8,7 @@ header:
   includes:
     - kas.yaml
 
-build_system: isar-privileged
+build_system: isar-rootless
 
 # using isar/meta-isar/conf/machine/rpi-arm64-v8-efi.conf
 machine: rpi-arm64-v8-efi
